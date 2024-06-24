@@ -19,11 +19,11 @@ public class Enroll {
 
     private LocalDateTime createdAt;
 
-    public Enroll(Long userId, Long lectureId, LocalDateTime createdAt)
+    public Enroll(Long userId, Long lectureId)
     {
         this.userId = userId;
         this.lectureId = lectureId;
-        this.createdAt = createdAt;
+        this.createdAt = LocalDateTime.now();
     }
 
     public Long getEnrollId() {

@@ -33,7 +33,7 @@ public class LectureServiceTest {
         //given
         Long userId = 100L;
         Long lectureId = 200L;
-        Enroll enroll = new Enroll(userId, lectureId, LocalDateTime.now());
+        Enroll enroll = new Enroll(userId, lectureId);
 
         //when
         when(enrollRepository.findByUserId(userId)).thenReturn((List<Enroll>) enroll);

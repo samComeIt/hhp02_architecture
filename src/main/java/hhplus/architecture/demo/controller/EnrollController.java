@@ -28,7 +28,7 @@ public class EnrollController {
     // 강의와 각 강의별 날짜가 추가 가능한 구조의 DB가 구현되었는지
     // (동시성) 각 강의 별로 최대 30명까지만 정상적으로 요청되도록 기능 구현
 
-    private EnrollService enrollService;
+    private final EnrollService enrollService;
 
     /**
      * 특강 신청
@@ -43,7 +43,7 @@ public class EnrollController {
      * 특강 선택
      */
     @GetMapping("/")
-    public Lecture getLecture(@RequestBody long lectureId)
+    public Lecture getLecture(@RequestParam long lectureId)
     {
         return enrollService.getLecture(lectureId);
     }
@@ -52,8 +52,8 @@ public class EnrollController {
      * 특강 신청 완료 여부 리스트 조회
      */
     @GetMapping("/application/{userId}")
-    public boolean application(@PathVariable long userId, @RequestBody long lectureId)
+    public boolean application(@PathVariable long userId, @RequestParam long lectureId)
     {
-        return enrollService.isEnrollExist(userId);
+        return enrollService.isEnrollExist(userId, lectureId);
     }
 }

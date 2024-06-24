@@ -31,4 +31,60 @@ public class Lecture {
         this.maxCapacity = maxCapacity;
         this.openAt = openAt;
     }
+
+    public Long getLectureId() {
+        return lectureId;
+    }
+
+    public void setLectureId(Long lectureId) {
+        this.lectureId = lectureId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Integer getCurCapacity() {
+        return curCapacity;
+    }
+
+    public void setCurCapacity(Integer curCapacity) {
+        this.curCapacity = curCapacity;
+    }
+
+    public Integer getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public void setMaxCapacity(Integer maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
+    public LocalDateTime getOpenAt() {
+        return openAt;
+    }
+
+    public void setOpenAt(LocalDateTime openAt) {
+        this.openAt = openAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }
