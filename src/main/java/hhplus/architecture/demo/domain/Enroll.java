@@ -2,6 +2,8 @@ package hhplus.architecture.demo.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Enroll {
 
@@ -15,14 +17,13 @@ public class Enroll {
     @Column(nullable = false)
     private Long lectureId;
 
-    private Long updatedAt;
+    private LocalDateTime createdAt;
 
-    private Long createdAt;
-
-    public Enroll(Long userId, Long lectureId)
+    public Enroll(Long userId, Long lectureId, LocalDateTime createdAt)
     {
         this.userId = userId;
         this.lectureId = lectureId;
+        this.createdAt = createdAt;
     }
 
     public Long getEnrollId() {
@@ -49,19 +50,11 @@ public class Enroll {
         this.lectureId = lectureId;
     }
 
-    public Long getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Long updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Long getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Long createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 }

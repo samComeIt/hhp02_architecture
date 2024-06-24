@@ -27,7 +27,6 @@ public class EnrollService {
 
     public Enroll apply(Enroll enroll)
     {
-
         return enrollRepository.save(enroll);
     }
 
