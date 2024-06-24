@@ -10,11 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class LectureControllerTest {
 
@@ -41,11 +47,14 @@ public class LectureControllerTest {
         LocalDateTime openAt = LocalDateTime.of(2024, 6, 30, 13, 0, 0);
 
         Lecture lecture = new Lecture(title, curCapacity, maxCapacity, openAt);
+        Long lectureId = lecture.getLectureId();
 
         // when
+        when(lectureRepository.findByLectureId(lectureId).get(0)).thenReturn(lecture);
         // then
-        mockMvc.perform(get("/", 100L)
-                .accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/")
+                        .param("lectureId", "100"))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 
