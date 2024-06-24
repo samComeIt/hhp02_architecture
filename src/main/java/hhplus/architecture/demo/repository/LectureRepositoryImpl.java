@@ -1,4 +1,4 @@
 package hhplus.architecture.demo.repository;
 
-public class LectureRepositoryImpl implements LectureRepository{
-}
+//public class LectureRepositoryImpl implements LectureRepository{
+//}

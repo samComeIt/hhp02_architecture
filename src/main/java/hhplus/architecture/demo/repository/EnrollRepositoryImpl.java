@@ -1,4 +1,4 @@
 package hhplus.architecture.demo.repository;
-
-public class EnrollRepositoryImpl implements EnrollRepository{
-}
+//
+//public class EnrollRepositoryImpl implements EnrollRepository{
+//}
