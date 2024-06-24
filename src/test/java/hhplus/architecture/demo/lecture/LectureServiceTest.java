@@ -42,4 +42,22 @@ public class LectureServiceTest {
         //then
         assertEquals(enroll, result);
     }
+
+    @Test
+    @DisplayName("특강 신청 최대 인워수 초과한 경우 신청 실패 테스트")
+    void testUserEnrollFail()
+    {
+        //given
+        Lecture lecture = new Lecture("특강103", 20, 20, LocalDateTime.now());
+        Long lectureId = lecture.getLectureId();
+        Long userId = 100L;
+
+        Enroll enroll = new Enroll(userId, lectureId);
+        //when
+        when(enrollRepository.save(enroll)).thenReturn(enroll);
+        boolean result = enrollService.isEnrollExist(userId, lectureId);
+
+        //then
+        assertEquals(enroll, result);
+    }
 }
