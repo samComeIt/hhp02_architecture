@@ -53,7 +53,7 @@ public class LectureControllerTest {
         when(lectureRepository.findByLectureId(lectureId).get(0)).thenReturn(lecture);
         // then
         mockMvc.perform(get("/")
-                        .param("lectureId", "100"))
+                        .param("lectureId", String.valueOf(lectureId)))
                 .andDo(print())
                 .andExpect(status().isOk());
     }

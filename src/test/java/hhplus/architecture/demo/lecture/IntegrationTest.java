@@ -15,6 +15,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -27,17 +29,16 @@ public class IntegrationTest {
     @DisplayName("특정한 특강에 최대인원수N를 초과 할 경우번째 학생이 신청 할 경우, 신청 실패 테스트")
     void testAddEnroll() throws Exception {
         // given
-        Lecture lecture = new Lecture("특강102", 20, 20, LocalDateTime.now());
+        Lecture lecture = new Lecture("특강102", 19, 20, LocalDateTime.now());
         Long lectureId = lecture.getLectureId();
-
+        Long userId = 100L;
 
         // when, then
         mockMvc.perform(post("/lectures/apply")
+                        .param("lectureId", String.valueOf(lectureId))
+                        .param("userId", String.valueOf(userId))
                 .contentType(MediaType.APPLICATION_JSON))
-                //.content()
                 .andExpect(status().isOk())
                 .andDo(print());
-
-
     }
 }
