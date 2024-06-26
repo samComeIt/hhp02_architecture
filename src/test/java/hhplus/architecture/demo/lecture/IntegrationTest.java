@@ -1,13 +1,9 @@
 package hhplus.architecture.demo.lecture;
 
 import hhplus.architecture.demo.domain.Lecture;
-import hhplus.architecture.demo.service.EnrollRepository;
-import hhplus.architecture.demo.service.EnrollService;
-import hhplus.architecture.demo.service.LectureRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
