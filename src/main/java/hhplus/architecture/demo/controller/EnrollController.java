@@ -31,12 +31,23 @@ public class EnrollController {
     private final EnrollService enrollService;
 
     /**
+     * 특강 등록
+     * @param lecture
+     * @return
+     */
+    @PostMapping("/create")
+    public Lecture create(@RequestBody Lecture lecture)
+    {
+        return enrollService.create(lecture);
+    }
+
+    /**
      * 특강 신청
      */
     @PostMapping("/apply")
-    public Enroll apply(@RequestBody Enroll enroll)
+    public Enroll apply(@RequestBody RequestDTO requestDTO)
     {
-        return enrollService.apply(enroll);
+        return enrollService.apply(requestDTO.getUserId(), requestDTO.getLectureId());
     }
 
     /**

@@ -1,11 +1,12 @@
 package hhplus.architecture.demo.controller.dto;
 
-import java.time.LocalDateTime;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-public record ResponseDTO(
-        Long userId,
-        Long lectureId,
-        LocalDateTime createdAt
-) {
-
+@ResponseStatus(code = HttpStatus.NOT_FOUND)
+public class ResponseDTO extends RuntimeException{
+    public ResponseDTO(String message)
+    {
+        super(message);
+    }
 }

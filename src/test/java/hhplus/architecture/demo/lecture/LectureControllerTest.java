@@ -1,17 +1,13 @@
 package hhplus.architecture.demo.lecture;
 
 import hhplus.architecture.demo.domain.Lecture;
-import hhplus.architecture.demo.repository.EnrollRepository;
-import hhplus.architecture.demo.repository.LectureRepository;
+import hhplus.architecture.demo.repository.EnrollJpaRepository;
+import hhplus.architecture.demo.repository.LectureJpaRepository;
 import hhplus.architecture.demo.service.EnrollService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -20,7 +16,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class LectureControllerTest {
 
@@ -31,10 +26,10 @@ public class LectureControllerTest {
     private EnrollService enrollService;
 
     @Autowired
-    private LectureRepository lectureRepository;
+    private LectureJpaRepository lectureRepository;
 
     @Autowired
-    private EnrollRepository enrollRepository;
+    private EnrollJpaRepository enrollRepository;
 
     @Test
     @DisplayName("특정 특강 조회")
@@ -50,12 +45,14 @@ public class LectureControllerTest {
         Long lectureId = lecture.getLectureId();
 
         // when
-        when(lectureRepository.findByLectureId(lectureId).get(0)).thenReturn(lecture);
+        when(lectureRepository.findAllByLectureId(lectureId).get(0)).thenReturn(lecture);
         // then
         mockMvc.perform(get("/")
                         .param("lectureId", String.valueOf(lectureId)))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
+
 
 }
