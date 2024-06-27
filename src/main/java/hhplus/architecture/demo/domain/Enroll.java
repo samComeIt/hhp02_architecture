@@ -10,7 +10,7 @@ import java.util.List;
 public class Enroll {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "enroll_id")
     private Long enrollId;
 
@@ -23,9 +23,9 @@ public class Enroll {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-//    @ManyToOne
-//    @JoinColumn(name="lectureId")
-//    private Lecture lecture;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="lecture_id", nullable = false)
+    private Lecture lecture;
 
     public Enroll(Long userId, Long lectureId)
     {

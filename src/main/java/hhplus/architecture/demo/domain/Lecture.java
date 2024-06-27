@@ -13,7 +13,7 @@ import java.util.List;
 public class Lecture {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lecture_id")
     private Long lectureId;
 
@@ -35,7 +35,7 @@ public class Lecture {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @OneToMany
+    @OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL)
     private List<Enroll> enrolls = new ArrayList<>();
 
     public Lecture(String title, Integer curCapacity, Integer maxCapacity, LocalDateTime openAt)
@@ -118,8 +118,11 @@ public class Lecture {
         return true;
     }
 
-//    void chkLectureExist() {
-//        if (!this.isExist()) throw new ResponseDTO(String.format("fail"));
-//    }
+    public void increaseEnrollCount() {
+        if (this.maxCapacity == this.curCapacity) {
+            throw new ResponseDTO("over");
+        }
+        this.curCapacity++;
+    }
 
 }
