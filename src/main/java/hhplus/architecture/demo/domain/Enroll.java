@@ -2,11 +2,13 @@ package hhplus.architecture.demo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
 public class Enroll {
 
     @Id
@@ -17,8 +19,8 @@ public class Enroll {
     @Column(nullable = false, name = "user_id")
     private Long userId;
 
-    @Column(nullable = false, name = "lecture_id")
-    private Long lectureId;
+//    @Column(nullable = false, name = "lecture_id")
+//    private Long lectureId;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -27,10 +29,17 @@ public class Enroll {
     @JoinColumn(name="lecture_id", nullable = false)
     private Lecture lecture;
 
-    public Enroll(Long userId, Long lectureId)
+//    public Enroll(Long userId, Long lectureId)
+//    {
+//        this.userId = userId;
+//        this.lectureId = lectureId;
+//        this.createdAt = LocalDateTime.now();
+//    }
+
+    public Enroll(Long userId, Lecture lecture)
     {
         this.userId = userId;
-        this.lectureId = lectureId;
+        this.lecture = lecture;
         this.createdAt = LocalDateTime.now();
     }
 
@@ -50,13 +59,13 @@ public class Enroll {
         this.userId = userId;
     }
 
-    public Long getLectureId() {
-        return lectureId;
-    }
-
-    public void setLectureId(Long lectureId) {
-        this.lectureId = lectureId;
-    }
+//    public Long getLectureId() {
+//        return lectureId;
+//    }
+//
+//    public void setLectureId(Long lectureId) {
+//        this.lectureId = lectureId;
+//    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
@@ -66,12 +75,12 @@ public class Enroll {
         this.createdAt = createdAt;
     }
 
-    public boolean isEnrollExist(List<Enroll> enrolls) throws Exception {
-        boolean isExist = enrolls.stream().filter(enroll -> enroll.getLectureId() == this.getLectureId()).toList().size() > 0;
-
-        if (!isExist) {
-            throw new Exception(String.format("fail"));
-        }
-        return true;
-    }
+//    public boolean isEnrollExist(List<Enroll> enrolls) throws Exception {
+//        boolean isExist = enrolls.stream().filter(enroll -> enroll.getLectureId() == this.getLectureId()).toList().size() > 0;
+//
+//        if (!isExist) {
+//            throw new Exception(String.format("fail"));
+//        }
+//        return true;
+//    }
 }

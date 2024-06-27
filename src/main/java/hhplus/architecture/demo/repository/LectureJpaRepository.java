@@ -1,5 +1,6 @@
 package hhplus.architecture.demo.repository;
 
+import hhplus.architecture.demo.domain.Enroll;
 import hhplus.architecture.demo.domain.Lecture;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,5 +16,7 @@ public interface LectureJpaRepository extends JpaRepository<Lecture, Long> {
 
     Lecture findByLectureId(Long lectureId);
 
-    //Lecture getById(Long lectureId);
+    Lecture getById(Long lectureId);
+
+    List<Enroll> findAllEnrollByLectureId(Long userId);
 }

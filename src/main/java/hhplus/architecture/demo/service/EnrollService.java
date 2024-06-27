@@ -41,27 +41,37 @@ public class EnrollService {
         if (lecture.isEmpty())
             throw new ResponseDTO("Lecture does not exist (lectureId : " + lectureId + ")");
 
-        // 이미 enroll 데이터 존재하는지 조회
-//        List<Enroll> enrolls = lecture.getEnrolls();
-//        List<Enroll> enrollList = enrollRepository.findAllByUserId(userId);
-//        if(enrolls.(lectureId))
-//            throw new ResponseDTO("Already enrolled");
-
+        Lecture lecture02 = lectureRepository.getById(lectureId);
         // 강의 현재 신청한 N명 초과인지 확인
+        lecture02.increaseEnrollCount();
 
-        return enrollRepository.save(new Enroll(userId, lectureId));
+        // 이미 enroll 데이터 존재하는지 조회
+        boolean doesExist = this.doesEnrollExistByUser(userId);
+        if (doesExist) throw new ResponseDTO("Already enrolled");
+
+        // 강의 현재 수강생수 업데이트
+        lecture02.setCurCapacity(lecture02.getCurCapacity());
+        lectureRepository.save(lecture02);
+
+        // 수강신청 등록
+        return enrollRepository.save(new Enroll(userId, lecture02));
     }
 
     public Lecture getLecture(Long lectureId)
     {
-        return lectureRepository.findByLectureId(lectureId);
+        return lectureRepository.getById(lectureId);
     }
 
     public boolean isEnrollExist(Long userId, Long lectureId)
     {
-        List<Enroll> list = enrollRepository.findAllByUserId(userId);
+        List<Enroll> list = lectureRepository.findAllEnrollByLectureId(lectureId);
 
-        return list.stream().filter(enroll -> enroll.getLectureId() == lectureId).toList().size() != 0;
+        return list.stream().filter(enroll -> enroll.getUserId() == userId).toList().size() != 0;
+    }
+
+    public boolean doesEnrollExistByUser(Long userId)
+    {
+        return enrollRepository.existsByUserId(userId);
     }
 
     public List<Enroll> getApplication(Long userId)

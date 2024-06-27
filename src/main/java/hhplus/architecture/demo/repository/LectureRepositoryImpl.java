@@ -1,5 +1,6 @@
 package hhplus.architecture.demo.repository;
 
+import hhplus.architecture.demo.domain.Enroll;
 import hhplus.architecture.demo.domain.Lecture;
 import hhplus.architecture.demo.service.LectureRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,14 @@ public class LectureRepositoryImpl implements LectureRepository {
     {
         return lectureJpaRepository.findByLectureId(lectureId);
     }
+
+    @Override
+    public Lecture getById(Long lectureId)
+    {
+        return lectureJpaRepository.getById(lectureId);
+    }
+
+    @Override
+    public List<Enroll> findAllEnrollByLectureId(Long lectureId) {return lectureJpaRepository.findAllEnrollByLectureId(lectureId); }
 
 }

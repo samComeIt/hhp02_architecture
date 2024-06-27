@@ -8,4 +8,6 @@ public interface EnrollRepository {
 
     Enroll save(Enroll enroll);
     List<Enroll> findAllByUserId(Long userId);
+
+    boolean existsByUserId(Long userId);
 }

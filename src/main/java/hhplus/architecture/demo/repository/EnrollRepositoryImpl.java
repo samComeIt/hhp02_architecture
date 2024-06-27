@@ -21,4 +21,7 @@ public class EnrollRepositoryImpl implements EnrollRepository {
     {
         return enrollJpaRepository.findAllByUserId(userId);
     }
+
+    @Override
+    public boolean existsByUserId(Long userId) { return enrollJpaRepository.existsById(userId); };
 }
