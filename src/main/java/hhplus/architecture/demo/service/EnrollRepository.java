@@ -10,4 +10,6 @@ public interface EnrollRepository {
     List<Enroll> findAllByUserId(Long userId);
 
     boolean existsByUserId(Long userId);
+
+    Enroll findByEnrollId(Long enrollId);
 }

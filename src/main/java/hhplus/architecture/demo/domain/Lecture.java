@@ -43,7 +43,7 @@ public class Lecture {
     public Lecture(String title, Integer curCapacity, Integer maxCapacity, LocalDateTime openAt)
     {
         this.title = title;
-        this.curCapacity = 0;
+        this.curCapacity = curCapacity;
         this.maxCapacity = maxCapacity;
         this.openAt = openAt;
         this.createdAt = LocalDateTime.now();

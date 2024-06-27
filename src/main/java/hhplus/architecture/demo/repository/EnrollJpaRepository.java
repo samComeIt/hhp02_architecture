@@ -16,4 +16,7 @@ public interface EnrollJpaRepository extends JpaRepository <Enroll, Long>{
     List<Enroll> findAllByUserId(Long userId);
 
     boolean existsByUserId(Long userId);
+
+
+    Enroll findByEnrollId(Long enrollId);
 }
