@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -125,6 +126,17 @@ public class Lecture {
             throw new ResponseDTO("over");
         }
         this.curCapacity++;
+    }
+
+    public boolean hasUserEnrolled(Long userId)
+    {
+        for(Enroll enroll: enrolls)
+        {
+            if (enroll.getUserId().equals(userId)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -15,13 +15,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-//@RequiredArgsConstructor
 public class EnrollService {
 
-    @Autowired
     private final EnrollRepository enrollRepository;
 
-    @Autowired
     private final LectureRepository lectureRepository;
 
     @PersistenceContext
@@ -50,28 +47,19 @@ public class EnrollService {
             e.printStackTrace();
         }
 
-
-//        // lecture가 존재하는지 확인
-//        List<Lecture> lecture = lectureRepository.findAllByLectureId(lectureId);
-//        if (lecture.isEmpty())
-//            throw new ResponseDTO("Lecture does not exist (lectureId : " + lectureId + ")");
-//
-//        Lecture lecture02 = lectureRepository.getById(lectureId);
-//        // 강의 현재 신청한 N명 초과인지 확인
-//        lecture02.increaseEnrollCount();
-
         lecture.increaseEnrollCount();
 
-        // 이미 enroll 데이터 존재하는지 조회
-        boolean doesExist = this.doesEnrollExistByUser(userId);
-        if (doesExist) throw new ResponseDTO("Already enrolled");
+        if(lecture.hasUserEnrolled(userId)) {
+            throw new IllegalStateException("User is already enrolled");
+        }
 
         // 강의 현재 수강생수 업데이트
         lecture.setCurCapacity(lecture.getCurCapacity());
         lectureRepository.save(lecture);
 
         // 수강신청 등록
-        return enrollRepository.save(new Enroll(userId, lecture));
+        Enroll enroll = new Enroll(userId, lecture);
+        return enrollRepository.save(enroll);
     }
 
     public Lecture getLecture(Long lectureId)

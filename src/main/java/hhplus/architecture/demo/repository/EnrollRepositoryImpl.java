@@ -26,6 +26,5 @@ public class EnrollRepositoryImpl implements EnrollRepository {
     public boolean existsByUserId(Long userId) { return enrollJpaRepository.existsById(userId); };
 
     @Override
-    public
-    Enroll findByEnrollId(Long enrollId) {return enrollJpaRepository.findByEnrollId(enrollId); }
+    public Enroll findByEnrollId(Long enrollId) {return enrollJpaRepository.findByEnrollId(enrollId); }
 }
